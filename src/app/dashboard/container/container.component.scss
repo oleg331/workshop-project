@@ -1,0 +1,11 @@
+.boards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 20px;
+}
+
+.add-board-container {
+    text-align: center;
+    padding: 0 0 20px;
+}
