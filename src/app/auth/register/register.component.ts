@@ -41,6 +41,6 @@ export class RegisterComponent implements OnInit {
   }
 
   public async register(userInfo: UserInfo): Promise<void> {
-    await this.authService.auth('register', userInfo);
+    await this.authService.auth('signup', userInfo);
   }
 }

@@ -1,17 +1,18 @@
 export interface Response {
-  suceess: boolean;
-  data: SigninData;
+  success: boolean;
+  data: AuthData;
 }
 
-interface SigninData {
+export interface AuthData {
   user: User;
   token: string;
 }
 
-interface User {
+export interface User {
     _id: string;
     name: string;
     email: string;
     createdAt?: string;
     updatedAt?: string;
+    __v?: number;
 }
