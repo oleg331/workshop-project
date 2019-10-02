@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <h2>Boards list</h2>
+  <div class="add-board-container">
+    <a mat-button color="primary">Add board</a>
+  </div>
+  <div class="boards">
+    <app-board *ngFor="let board of boards" [board]="board"></app-board>
+  </div>
+</div>
