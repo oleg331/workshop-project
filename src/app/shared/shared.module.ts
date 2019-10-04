@@ -5,21 +5,32 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ModalModule } from './modules/modal/modal.module';
+
+import { HeaderComponent } from './components/header/header.component';
+import { WrapperLayoutComponent } from './components/wrapper-layout/wrapper-layout.component';
+import { ContentLayoutComponent } from './components/content-layout/content-layout.component';
 
 @NgModule({
+  declarations: [WrapperLayoutComponent, ContentLayoutComponent, HeaderComponent],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule,
   ],
   exports: [
+    CommonModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
     FlexLayoutModule,
-    BrowserAnimationsModule
+    ModalModule,
+    HeaderComponent,
+    WrapperLayoutComponent,
+    ContentLayoutComponent
   ]
 })
 export class SharedModule { }

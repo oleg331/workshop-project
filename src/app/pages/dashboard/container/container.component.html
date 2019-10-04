@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <h2>Boards list</h2>
+  <header class="header">
+    <app-search
+      class="search"
+      (handleSearchText)="handleSearchText($event)"
+      [searchText]="searchText"
+    ></app-search>
+    <a 
+      (click)="createAddBoardModal()" 
+      mat-raised-button 
+      color="primary">
+      Add board
+    </a>
+  </header>
+  <div class="boards">
+    <app-board
+      *ngFor="let board of boardsList?.boards | filterByBoard: searchText"
+      (boardDeleted)="handleBoardDeleted()"
+      [board]="board"
+    ></app-board>
+  </div>
+</div>
