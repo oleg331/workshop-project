@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/core/services';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  public searchText: string;
 
   constructor(private authService: AuthService) { }
 

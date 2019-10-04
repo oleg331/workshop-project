@@ -1,0 +1,11 @@
+mat-card-content {
+    .action {
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.users {
+    margin-bottom: 10px;
+}

@@ -39,6 +39,6 @@ export class LoginComponent implements OnInit {
   }
 
   public async login(userInfo: UserInfo): Promise<void> {
-    await this.authService.auth('login', userInfo);
+    await this.authService.auth('signin', userInfo);
   }
 }
