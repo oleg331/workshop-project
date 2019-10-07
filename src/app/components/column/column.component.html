@@ -1,0 +1,22 @@
+<mat-card class="column">
+  <mat-card-header>
+    <mat-card-title>{{ column.title }}</mat-card-title>
+
+    <mat-chip-list class="column-actions">
+      <mat-chip matTooltip="edit column title">
+        <mat-icon aria-hidden="false" aria-label="edit column title"
+          >edit</mat-icon
+        >
+      </mat-chip>
+      <mat-chip matTooltip="delete column">
+        <mat-icon aria-hidden="false" aria-label="delete column"
+          >delete</mat-icon
+        >
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card-header>
+
+  <mat-card-content>
+    <ng-content name="tasks"></ng-content>
+  </mat-card-content>
+</mat-card>

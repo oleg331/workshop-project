@@ -9,11 +9,10 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { AuthGuardService as AuthGuard } from './core/services/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: '',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
-    canActivate: [AuthGuard]
   },
   { path: 'auth', component: AuthComponent },
   { path: '**', redirectTo: '' }

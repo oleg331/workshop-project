@@ -6,7 +6,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { ContainerComponent } from './container/container.component';
 import { BoardComponent } from '../../components/board/board.component';
-
 import { SearchComponent } from '../../components/search/search.component';
 import { AddBoardComponent } from '../../components/modals/add-board/add-board.component';
 
@@ -23,7 +22,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FilterByBoardPipe
   ],
   entryComponents: [AddBoardComponent],
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, DashboardRoutingModule],
+  imports: [
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DashboardRoutingModule
+  ],
   exports: [DashboardComponent]
 })
 export class DashboardModule {}

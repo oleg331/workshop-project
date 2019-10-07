@@ -1,5 +1,5 @@
 <div class="board-header" fxLayout="row">
-  <h1 class="board-title">{{boardInfo.title}}</h1>
+  <h1 class="board-title">{{boardTitle}}</h1>
 
   <mat-chip-list class="board-actions">
     <mat-chip class="edit-board-title" matTooltip="edit board title">
@@ -12,49 +12,11 @@
 </div>
 
 <div class="board-users">
-  <mat-chip-list>
-    <h4>Users:</h4>
-    <mat-chip mat-raised-button *ngFor="let user of users" matTooltip="{{user.email}} (click to delete)">
-      {{ user.name }}
-    </mat-chip>
-    <mat-chip mat-raised-button *ngIf="!users.length">The board has no users</mat-chip>
-    <mat-chip mat-raised-button matTooltip="add new user">
-      <mat-icon aria-hidden="false" aria-label="add user">group_add</mat-icon>
-    </mat-chip>
-  </mat-chip-list>
+  <app-users [users]="users"></app-users>
 </div>
 
 <div class="board-columns">
-  <mat-card class="column" *ngFor="let column of columns">
-    <mat-card-header>
-      <mat-card-title>{{column.title}}</mat-card-title>
-
-      <mat-chip-list class="column-actions">
-        <mat-chip matTooltip="edit column title">
-          <mat-icon aria-hidden="false" aria-label="edit column title">edit</mat-icon>
-        </mat-chip>
-        <mat-chip matTooltip="delete column">
-          <mat-icon aria-hidden="false" aria-label="delete column">delete</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
-    </mat-card-header>
-
-    <mat-card-content>
-      <mat-card *ngFor="let task of column.tasks" class="task">
-        <mat-card-subtitle>{{task.task}}</mat-card-subtitle>
-
-        <mat-chip-list class="task-actions">
-          <mat-chip matTooltip="view task details">
-            <mat-icon aria-hidden="false" aria-label="edit task title">remove_red_eye</mat-icon>
-          </mat-chip>
-          <mat-chip matTooltip="edit task title">
-            <mat-icon aria-hidden="false" aria-label="edit task title">edit</mat-icon>
-          </mat-chip>
-          <mat-chip matTooltip="delete task">
-            <mat-icon aria-hidden="false" aria-label="delete task">delete</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-      </mat-card>
-    </mat-card-content>
-  </mat-card>
+  <app-column *ngFor="let column of columns" [column]="column">
+    <app-task (taskDeleted)="handleItemDeleted()" (addTask)="createAddTaskModal($event)" *ngFor="let task of column.tasks" [task]="task"></app-task>
+  </app-column>
 </div>
