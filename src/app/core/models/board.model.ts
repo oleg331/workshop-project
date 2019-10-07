@@ -7,7 +7,7 @@ export interface Board {
   columns: Column[];
 }
 
-interface Column {
+export interface Column {
   _id: string;
   title: string;
   tasks: Task[];

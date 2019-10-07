@@ -21,6 +21,10 @@ export class BoardsService extends ApiService {
     return await this.get('boards');
   }
 
+  async getBoard(boardId: string): Promise<any> {
+    return await this.get(`boards/${boardId}`);
+  }
+
   createBoard(title: string): Promise<any> {
     return this.post('boards', { title });
   }
