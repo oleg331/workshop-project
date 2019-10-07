@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+import { UserService } from 'src/app/core/services';
 
 import { User } from 'src/app/core/models';
 
@@ -9,11 +11,35 @@ import { User } from 'src/app/core/models';
 })
 export class UsersComponent implements OnInit {
   @Input() users: User[];
+  @Input() boardId: string;
+  @Output() userAdded = new EventEmitter<any>();
+  @Output() userDeleted = new EventEmitter<boolean>();
 
-  constructor() { }
+  usersList: User[];
+
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
-    console.log('users', this.users);
+    this.getAllUsers();
+  }
+
+  async getAllUsers(): Promise<any> {
+    const response = await this.userService.getAllUsers();
+    this.usersList = response.users;
+  }
+
+  addUser() {
+    this.userAdded.emit({
+      id: this.boardId,
+      type: 'user',
+      title: 'Add user modal',
+      usersList: this.usersList
+    });
+  }
+
+  async deleteUser(userId: string): Promise<void> {
+    await this.userService.toggleUserOnBoard(this.boardId, userId);
+    this.userDeleted.emit(true);
   }
 
 }

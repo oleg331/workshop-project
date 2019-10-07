@@ -12,11 +12,15 @@ export class TasksService extends ApiService {
     super(http);
   }
 
+  addTask(id: string, body: any): Promise<any> {
+    return this.post(`tasks/${id}`, body);
+  }
+
   deleteTask(id: string): Promise<any> {
     return this.delete(`tasks/${id}`);
   }
 
-  updateTask(id: string): Promise<any> {
-    return this.put(`tasks/${id}`);
+  updateTask(id: string, body: any): Promise<any> {
+    return this.put(`tasks/${id}`, body);
   }
 }

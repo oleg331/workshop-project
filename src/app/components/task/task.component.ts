@@ -14,12 +14,10 @@ import { Task } from 'src/app/core/models/board.model';
 export class TaskComponent implements OnInit {
   @Input() task: Task;
   @Output() taskDeleted = new EventEmitter<boolean>();
-  @Output() addTask = new EventEmitter<any>();
+  @Output() taskEdited = new EventEmitter<any>();
 
   constructor(
-    private tasksService: TasksService,
-    private modalService: ModalService,
-    private reloadService: ReloadService
+    private tasksService: TasksService
   ) {}
 
   ngOnInit(): void {}
@@ -30,7 +28,9 @@ export class TaskComponent implements OnInit {
   }
 
   editTask(): void {
-    this.addTask.emit({
+    this.taskEdited.emit({
+      id: this.task._id,
+      type: 'task',
       title: 'Edit task modal',
       oldTitle: this.task.task
     });

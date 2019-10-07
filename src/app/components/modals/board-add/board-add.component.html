@@ -7,32 +7,44 @@
     autocomplete="off"
     novalidate
     fxLayout="column wrap"
-    [formGroup]="authForm"
-    (ngSubmit)="checkFormValidation(authForm.value.title)"
+    [formGroup]="addForm"
+    (ngSubmit)="checkFormValidation(addForm.value.value)"
   >
     <mat-dialog-content>
       <mat-form-field>
+        <mat-select
+          *ngIf="usersList"
+          id="value"
+          name="value"
+          formControlName="value"
+          required
+        >
+          <mat-option *ngFor="let user of usersList" [value]="user._id">
+            {{ user.name }}
+          </mat-option>
+        </mat-select>
         <input
+          *ngIf="!usersList"
           matInput
-          id="title"
-          name="title"
-          formControlName="title"
-          placeholder="Enter board title"
+          id="value"
+          name="value"
+          formControlName="value"
           required
         />
-        <mat-error *ngIf="hasError('title', 'required')">
-          Title is required
+        <mat-error *ngIf="hasError('value', 'required')">
+          Field is required
         </mat-error>
       </mat-form-field>
     </mat-dialog-content>
+
     <mat-dialog-actions>
       <button
         type="submit"
         mat-raised-button
-        [disabled]="!authForm.valid"
+        [disabled]="!addForm.valid"
         color="primary"
       >
-        Update title
+        Add
       </button>
     </mat-dialog-actions>
   </form>

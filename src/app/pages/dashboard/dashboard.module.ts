@@ -7,7 +7,6 @@ import { DashboardComponent } from './dashboard.component';
 import { ContainerComponent } from './container/container.component';
 import { BoardComponent } from '../../components/board/board.component';
 import { SearchComponent } from '../../components/search/search.component';
-import { AddBoardComponent } from '../../components/modals/add-board/add-board.component';
 
 import { FilterByBoardPipe } from '../../shared/pipes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,10 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ContainerComponent,
     BoardComponent,
     SearchComponent,
-    AddBoardComponent,
     FilterByBoardPipe
   ],
-  entryComponents: [AddBoardComponent],
   imports: [
     SharedModule,
     FormsModule,

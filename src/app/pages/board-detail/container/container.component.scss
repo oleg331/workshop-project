@@ -1,0 +1,21 @@
+.board-header {
+  align-items: center;
+
+  .board-title {
+    padding-right: 10px;
+  }
+}
+
+.board-users {
+  max-width: 750px;
+  padding-bottom: 20px;
+}
+
+.board-columns {
+  column-width: 19em;
+  column-gap: 1em;
+}
+
+.task {
+  margin-bottom: 5px;
+}

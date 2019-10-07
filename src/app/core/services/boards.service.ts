@@ -32,4 +32,12 @@ export class BoardsService extends ApiService {
   deleteBoard(id: string): Promise<any> {
     return this.delete(`boards/${id}`);
   }
+
+  updateBoard(id: string, body: any): Promise<any> {
+    return this.put(`boards/${id}`, body);
+  }
+
+  toggleUserOnBoard(id: string, body: any): Promise<any> {
+    return this.patch(`tasks/${id}`, body);
+  }
 }

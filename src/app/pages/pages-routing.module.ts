@@ -4,12 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
-  // { path: 'dashboard', redirectTo: '/', pathMatch: 'full' },
   {
     path: '',
     component: PagesComponent,
     children: [
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
@@ -17,7 +15,8 @@ const routes: Routes = [
       {
         path: 'board/:id',
         loadChildren: () => import('./board-detail/board-detail.module').then(m => m.BoardDetailModule)
-      }
+      },
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ]
   }
 ];
