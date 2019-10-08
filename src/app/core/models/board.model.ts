@@ -8,29 +8,29 @@ export interface Board {
 }
 
 interface Column {
-    _id: string;
-    title: string;
-    tasks: Task[];
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
+  _id: string;
+  title: string;
+  tasks: Task[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 interface Task {
-    _id: string;
-    task: string;
-    users: User[];
-    comments: Comment[];
-    createdAt: string;
-    updatedAt: string;
+  _id: string;
+  task: string;
+  users: User[];
+  comments: Comment[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface Comment {
-    _id: string;
-    email: string;
-    name: string;
-    comment: string;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
+  _id: string;
+  email: string;
+  name: string;
+  comment: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
