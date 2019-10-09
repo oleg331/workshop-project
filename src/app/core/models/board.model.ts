@@ -7,7 +7,7 @@ export interface Board {
   columns: Column[];
 }
 
-interface Column {
+export interface Column {
   _id: string;
   title: string;
   tasks: Task[];
@@ -16,7 +16,7 @@ interface Column {
   __v: number;
 }
 
-interface Task {
+export interface Task {
   _id: string;
   task: string;
   users: User[];
@@ -25,7 +25,7 @@ interface Task {
   updatedAt: string;
 }
 
-interface Comment {
+export interface Comment {
   _id: string;
   email: string;
   name: string;

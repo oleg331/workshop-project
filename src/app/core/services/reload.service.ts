@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class ReloadService {
   reloadDashboard$: Subject<any> = new Subject<any>();
+  reloadBoard$: Subject<any> = new Subject<any>();
 
   constructor() { }
 }

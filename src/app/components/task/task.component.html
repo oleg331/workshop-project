@@ -1,0 +1,17 @@
+<mat-card class="task">
+  <mat-card-subtitle>{{ task.task }}</mat-card-subtitle>
+
+  <mat-chip-list class="task-actions">
+    <mat-chip matTooltip="view task details">
+      <mat-icon aria-hidden="false" aria-label="view task details"
+        >remove_red_eye</mat-icon
+      >
+    </mat-chip>
+    <mat-chip matTooltip="edit task title" (click)="editTask()">
+      <mat-icon aria-hidden="false" aria-label="edit task title">edit</mat-icon>
+    </mat-chip>
+    <mat-chip matTooltip="delete task" (click)="deleteTask()">
+      <mat-icon aria-hidden="false" aria-label="delete task">delete</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</mat-card>

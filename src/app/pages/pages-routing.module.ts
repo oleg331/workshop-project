@@ -15,7 +15,8 @@ const routes: Routes = [
       {
         path: 'board/:id',
         loadChildren: () => import('./board-detail/board-detail.module').then(m => m.BoardDetailModule)
-      }
+      },
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ]
   }
 ];
