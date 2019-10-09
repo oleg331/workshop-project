@@ -42,4 +42,8 @@ export class UsersComponent implements OnInit {
     this.userDeleted.emit(true);
   }
 
+  trackByUserId(index: string, user: User): string {
+    return user._id;
+  }
+
 }

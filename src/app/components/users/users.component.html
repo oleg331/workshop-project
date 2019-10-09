@@ -1,16 +1,15 @@
 <mat-chip-list>
   <h4>Users:</h4>
-  <!-- <ng-content name="user"></ng-content> -->
   <mat-chip
     class="user"
     mat-raised-button
-    *ngFor="let user of users"
+    *ngFor="let user of users; trackBy: trackByUserId"
     matTooltip="{{ user.email }} (click to delete)"
     (click)="deleteUser(user._id)"
   >
     {{ user.name }}
   </mat-chip>
-  <mat-chip mat-raised-button *ngIf="!users.length"
+  <mat-chip mat-raised-button *ngIf="!users"
     >The board has no users</mat-chip
   >
   <mat-chip (click)="addUser()" class="add-user" mat-raised-button matTooltip="add new user">

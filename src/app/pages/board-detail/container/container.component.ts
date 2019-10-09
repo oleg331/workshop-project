@@ -5,10 +5,11 @@ import { ModalService } from '../../../shared/modules/modal/modal.service';
 import { BoardsService } from '../../../core/services/boards.service';
 import { ReloadService } from 'src/app/core/services/reload.service';
 
-import { Board, User, Column } from '../../../core/models';
+import { Board, User, Column, Task } from '../../../core/models';
 
 import { BoardEditComponent } from '../../../components/modals/board-edit/board-edit.component';
 import { BoardAddComponent } from 'src/app/components/modals/board-add/board-add.component';
+import { TaskDetailComponent } from 'src/app/components/task/task-detail/task-detail.component';
 
 @Component({
   selector: 'app-board-detail-container',
@@ -23,6 +24,8 @@ export class ContainerComponent implements OnInit {
   private columns: Column[];
   private users: User[];
 
+  private isTaskModalOpened = false;
+
   constructor(
     private route: ActivatedRoute,
     private modalService: ModalService,
@@ -35,15 +38,19 @@ export class ContainerComponent implements OnInit {
       const boardId = params['id'];
       this.boardId = boardId;
 
-      this.getBoardInfo(boardId);
+      await this.getBoardInfo(boardId);
     });
 
-    this.reloadService.reloadBoard$.asObservable().subscribe(async () => {
-      this.getBoardInfo(this.boardId);
+    this.reloadService.reloadDashboard$.asObservable().subscribe(async () => {
+      const board = await this.getBoardInfo(this.boardId);
+
+      if (this.isTaskModalOpened) {
+        this.reloadService.reloadTaskDetail$.next(board);
+      }
     });
   }
 
-  async getBoardInfo(boardId: string) {
+  async getBoardInfo(boardId: string): Promise<any> {
     const boardInfo = await this.boardsService.getBoard(boardId);
 
     this.boardInfo = boardInfo;
@@ -51,6 +58,10 @@ export class ContainerComponent implements OnInit {
     this.boardTitle = boardInfo.title;
     this.users = boardInfo.users;
     this.columns = boardInfo.columns;
+
+    this.reloadService.reloadTaskDetail$.next(boardInfo);
+
+    return boardInfo;
   }
 
   handleItemDeleted(): void {
@@ -78,27 +89,41 @@ export class ContainerComponent implements OnInit {
     this.createBoardAddModal(modalOptions);
   }
 
-  createBoardEditModal(modalOptions: any): void {
-    const modalRef = this.modalService.open(BoardEditComponent, modalOptions);
-
+  subscribeModalRef(modalRef: any): void {
     modalRef
       .onResult()
       .subscribe(
         closed => console.log('closed', closed),
-        dismissed => console.log('dismissed', dismissed),
+        dismissed => {
+          console.log('dismissed', dismissed);
+          this.isTaskModalOpened = false;
+        },
         () => console.log('completed')
       );
   }
 
+  createBoardEditModal(modalOptions: any): void {
+    const modalRef = this.modalService.open(BoardEditComponent, modalOptions);
+    this.subscribeModalRef(modalRef);
+  }
+
   createBoardAddModal(modalOptions: any): void {
     const modalRef = this.modalService.open(BoardAddComponent, modalOptions);
+    this.subscribeModalRef(modalRef);
+  }
 
-    modalRef
-      .onResult()
-      .subscribe(
-        closed => console.log('closed', closed),
-        dismissed => console.log('dismissed', dismissed),
-        () => console.log('completed')
-      );
+  createTaskDetailModal(modalOptions: any): void {
+    this.isTaskModalOpened = true;
+
+    const modalRef = this.modalService.open(TaskDetailComponent, modalOptions);
+    this.subscribeModalRef(modalRef);
+  }
+
+  trackByColumnId(index: string, column: Column): string {
+    return column._id;
+  }
+
+  trackByTaskId(index: string, task: Task): string {
+    return task._id;
   }
 }

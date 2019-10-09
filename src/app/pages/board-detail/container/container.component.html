@@ -19,17 +19,20 @@
 
 <div class="board-columns">
   <app-column
-    *ngFor="let column of columns"
+    *ngFor="let column of columns; trackBy: trackByColumnId"
     [column]="column"
     (columnDeleted)="handleItemDeleted()"
     (columnEdited)="createBoardEditModal($event)"
     (taskAdded)="createBoardAddModal($event)"
   >
     <app-task
-      *ngFor="let task of column.tasks"
+      *ngFor="let task of column.tasks; trackBy: trackByTaskId"
+      [task]="task"
+      [columnId]="column._id"
       (taskDeleted)="handleItemDeleted()"
       (taskEdited)="createBoardEditModal($event)"
-      [task]="task"
+      (taskViewed)="createTaskDetailModal($event)"
+      (taskUpdated)="updateTaskDetailModal($event)"
     ></app-task>
   </app-column>
 </div>

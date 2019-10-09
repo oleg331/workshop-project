@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AddBoardComponent } from 'src/app/components/modals/add-board/add-board.component';
+import { BoardAddComponent } from 'src/app/components/modals/board-add/board-add.component';
 
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { ModalService } from 'src/app/shared/modules/modal/modal.service';
@@ -42,13 +42,26 @@ export class ContainerComponent implements OnInit {
     this.searchText = updatedText;
   }
 
-  createAddBoardModal(): void {
-    const modalRef = this.modalService.open(AddBoardComponent, { title: 'Create board modal' });
+  addBoard() {
+    const modalOptions = {
+      type: 'board',
+      title: 'Create board modal'
+    };
+
+    this.createAddBoardModal(modalOptions);
+  }
+
+  createAddBoardModal(modalOptions: any): void {
+    const modalRef = this.modalService.open(BoardAddComponent, modalOptions);
 
     modalRef.onResult().subscribe(
       closed => console.log('closed', closed),
       dismissed => console.log('dismissed', dismissed),
       () => console.log('completed')
     );
+  }
+
+  trackByBoardId(index: string, board: Board): string {
+    return board._id;
   }
 }

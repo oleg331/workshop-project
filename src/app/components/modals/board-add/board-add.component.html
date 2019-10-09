@@ -19,7 +19,7 @@
           formControlName="value"
           required
         >
-          <mat-option *ngFor="let user of usersList" [value]="user._id">
+          <mat-option *ngFor="let user of usersList; trackBy: trackByUserId" [value]="user._id">
             {{ user.name }}
           </mat-option>
         </mat-select>

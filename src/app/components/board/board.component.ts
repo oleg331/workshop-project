@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { BoardsService } from 'src/app/core/services/boards.service';
 
-import { Board } from 'src/app/core/models';
+import { Board, User } from 'src/app/core/models';
 
 
 @Component({
@@ -27,6 +27,10 @@ export class BoardComponent implements OnInit {
     await this.boardsService.deleteBoard(this.board._id);
     this.boardDeleted.emit(true);
 
+  }
+
+  trackByUserId(index: string, user: User): string {
+    return user._id;
   }
 
 }
