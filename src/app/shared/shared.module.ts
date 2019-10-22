@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,13 +14,21 @@ import { WrapperLayoutComponent } from './components/wrapper-layout/wrapper-layo
 import { ContentLayoutComponent } from './components/content-layout/content-layout.component';
 
 @NgModule({
-  declarations: [WrapperLayoutComponent, ContentLayoutComponent, HeaderComponent],
+  declarations: [
+    WrapperLayoutComponent,
+    ContentLayoutComponent,
+    HeaderComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right'
+    }),
+    ModalModule
   ],
   exports: [
     CommonModule,
@@ -33,4 +42,4 @@ import { ContentLayoutComponent } from './components/content-layout/content-layo
     ContentLayoutComponent
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -17,6 +17,7 @@ export interface Column {
 }
 
 export interface Task {
+  title(title: any);
   _id: string;
   task: string;
   users: User[];

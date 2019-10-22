@@ -11,6 +11,8 @@ import { BoardEditComponent } from '../../../components/modals/board-edit/board-
 import { BoardAddComponent } from 'src/app/components/modals/board-add/board-add.component';
 import { TaskDetailComponent } from 'src/app/components/task/task-detail/task-detail.component';
 
+import { trackById } from 'src/app/core/utils';
+
 @Component({
   selector: 'app-board-detail-container',
   templateUrl: './container.component.html',
@@ -26,6 +28,9 @@ export class ContainerComponent implements OnInit {
 
   private isTaskModalOpened = false;
 
+  trackByColumnId = trackById;
+  trackByTaskId = trackById;
+
   constructor(
     private route: ActivatedRoute,
     private modalService: ModalService,
@@ -35,7 +40,7 @@ export class ContainerComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(async params => {
-      const boardId = params['id'];
+      const boardId = params.id;
       this.boardId = boardId;
 
       await this.getBoardInfo(boardId);
@@ -117,13 +122,5 @@ export class ContainerComponent implements OnInit {
 
     const modalRef = this.modalService.open(TaskDetailComponent, modalOptions);
     this.subscribeModalRef(modalRef);
-  }
-
-  trackByColumnId(index: string, column: Column): string {
-    return column._id;
-  }
-
-  trackByTaskId(index: string, task: Task): string {
-    return task._id;
   }
 }

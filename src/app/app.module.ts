@@ -10,7 +10,6 @@ import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './pages/pages.module';
 
 import { AppComponent } from './app.component';
-import { BoardAddComponent } from './components/modals/board-add/board-add.component';
 
 import { CustomHttpInterceptor } from './core/services/http.interceptor';
 
@@ -19,7 +18,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [AppComponent, BoardAddComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -33,7 +32,6 @@ export function tokenGetter() {
     SharedModule,
     PagesModule
   ],
-  entryComponents: [BoardAddComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

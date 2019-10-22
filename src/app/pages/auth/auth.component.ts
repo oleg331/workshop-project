@@ -9,15 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    public router: Router
-  ) { }
+  constructor(private authService: AuthService, public router: Router) {}
 
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['dashboard']);
     }
   }
-
 }

@@ -4,6 +4,7 @@ import { BoardsService } from 'src/app/core/services/boards.service';
 
 import { Board, User } from 'src/app/core/models';
 
+import { trackById } from 'src/app/core/utils';
 
 @Component({
   selector: 'app-board',
@@ -14,11 +15,17 @@ export class BoardComponent implements OnInit {
   @Input() board: Board;
   @Output() boardDeleted = new EventEmitter<boolean>();
 
-  public boardId: string;
+  trackByUserId = trackById;
 
-  constructor(private boardsService: BoardsService) { }
+  public boardId: string;
+  public users: User[];
+
+  constructor(private boardsService: BoardsService) {}
 
   ngOnInit() {
+    if (this.board.users) {
+      this.users = this.board.users;
+    }
   }
 
   async deleteBoard(event: Event): Promise<void> {
@@ -26,11 +33,5 @@ export class BoardComponent implements OnInit {
 
     await this.boardsService.deleteBoard(this.board._id);
     this.boardDeleted.emit(true);
-
   }
-
-  trackByUserId(index: string, user: User): string {
-    return user._id;
-  }
-
 }

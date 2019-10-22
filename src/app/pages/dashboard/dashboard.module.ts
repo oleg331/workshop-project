@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 import { SharedModule } from '../../shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
@@ -17,13 +19,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ContainerComponent,
     BoardComponent,
     SearchComponent,
-    FilterByBoardPipe
+    FilterByBoardPipe,
   ],
   imports: [
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    SimpleNotificationsModule.forRoot()
   ],
   exports: [DashboardComponent]
 })

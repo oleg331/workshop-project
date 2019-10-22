@@ -48,7 +48,7 @@ export class AuthService extends ApiService {
         return user;
     }
 
-    logout() {
+    logout(): void {
         localStorage.removeItem('token');
         this.router.navigate(['auth']);
         this.currentUserSubject.next(null);
