@@ -10,7 +10,7 @@ import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { TaskDetailComponent } from './task-detail.component';
 import { ReversePipe } from 'src/app/shared/pipes';
 
-fdescribe('TaskDetailComponent', () => {
+describe('TaskDetailComponent', () => {
   let component: TaskDetailComponent;
   let fixture: ComponentFixture<TaskDetailComponent>;
   let jwtHelper: TaskDetailComponent;

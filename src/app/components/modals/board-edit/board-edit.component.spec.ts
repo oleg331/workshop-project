@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { SharedModule } from 'src/app/shared/shared.module';
+
 import { BoardEditComponent } from './board-edit.component';
 
 describe('BoardEditComponent', () => {
@@ -8,7 +13,8 @@ describe('BoardEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardEditComponent]
+      declarations: [BoardEditComponent],
+      imports: [SharedModule, BrowserAnimationsModule, ReactiveFormsModule]
     }).compileComponents();
   }));
 

@@ -18,14 +18,10 @@ export class BoardComponent implements OnInit {
   trackByUserId = trackById;
 
   public boardId: string;
-  public users: User[];
 
   constructor(private boardsService: BoardsService) {}
 
   ngOnInit() {
-    if (this.board.users) {
-      this.users = this.board.users;
-    }
   }
 
   async deleteBoard(event: Event): Promise<void> {

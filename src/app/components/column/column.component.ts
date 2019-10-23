@@ -15,10 +15,9 @@ export class ColumnComponent implements OnInit {
   @Output() columnEdited = new EventEmitter<any>();
   @Output() taskAdded = new EventEmitter<any>();
 
-  constructor(private columnsService: ColumnsService) { }
+  constructor(private columnsService: ColumnsService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async deleteColumn(): Promise<void> {
     await this.columnsService.deleteColumn(this.column._id);
@@ -30,7 +29,7 @@ export class ColumnComponent implements OnInit {
       id: this.column._id,
       type: 'column',
       title: 'Edit column modal',
-      oldTitle: this.column.title,
+      oldTitle: this.column.title
     });
   }
 
@@ -41,5 +40,4 @@ export class ColumnComponent implements OnInit {
       title: 'Add task modal'
     });
   }
-
 }
