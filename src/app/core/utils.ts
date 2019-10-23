@@ -1,5 +1,5 @@
 import { APIUrl } from './contants';
-import { HttpParams, Status, HttpMethods, NotificationOptions, Notification } from './models';
+import { HttpParams, Status, HttpMethods, NotificationOptions } from './models';
 
 export const isArray = (value: any) => {
   return Array.isArray(value);
@@ -21,7 +21,7 @@ export const getServiceFromUrl = (url: string, method: any) => {
 };
 
 export const getNotificationParams = (
-  type: Notification['type'],
+  type: Status.success | Status.error,
   httpParams: HttpParams
 ) => {
   const typeResponseText = (type === Status.success)
@@ -35,7 +35,7 @@ export const getNotificationParams = (
   [name, id, method] = Object.values(httpParams);
 
   const options = {
-    type: name as Notification['type'],
+    type: name as Status.success | Status.error,
     title: '',
     message: ''
   };

@@ -41,7 +41,8 @@ export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
     });
 
     this.reloadService.reloadTaskDetail$.asObservable()
-      .pipe(takeUntil(this.destroy$)).subscribe((board: Board) => {
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((board: Board) => {
         const taskUpdated = this.filterBoardByTask(board.columns);
         this.updateTask(taskUpdated);
       });
@@ -71,7 +72,7 @@ export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
     this.comments = task.comments;
   }
 
-  public hasError = (controlName: string, errorName: string) => {
+  public hasError = (controlName: string, errorName: string): boolean => {
     return this.taskDetail.controls[controlName].hasError(errorName);
   }
 
@@ -83,7 +84,7 @@ export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
     this.taskDetail.reset();
   }
 
-  async addComment(comment: string): Promise<any> {
+  async addComment(comment: string): Promise<void> {
 
     const userInfo = this.tasksService.getUserInfo();
 

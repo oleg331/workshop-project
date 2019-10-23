@@ -1,3 +1,5 @@
+import { random } from 'lodash';
+
 import { User } from './response.model';
 
 export interface Board {
@@ -35,3 +37,10 @@ export interface Comment {
   updatedAt: string;
   __v: number;
 }
+
+export const testBoard: Board = {
+  _id: `randon_id_${random(1, 1000)}`,
+  title: 'title',
+  users: [],
+  columns: []
+};

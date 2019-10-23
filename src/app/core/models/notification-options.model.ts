@@ -1,11 +1,8 @@
 import { TemplateRef } from '@angular/core';
+import { Status } from './status.model';
 
 export class NotificationOptions {
-  type: Notification['type'];
+  type: Status.success | Status.error;
   title: string;
   message: string;
-}
-
-export class Notification {
-  type: 'success' | 'error';
 }

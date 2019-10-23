@@ -8,7 +8,6 @@ import { UserService } from './user.service';
 
 describe('UserService', async () => {
   let service: UserService;
-  let httpMock: HttpTestingController;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
@@ -18,10 +17,8 @@ describe('UserService', async () => {
   );
 
   service = TestBed.get(UserService);
-  httpMock = TestBed.get(HttpTestingController);
 
-  it('should be recieve all users', async () => {
-    const result = await service.getAllUsers();
-    expect(result).toBe('Users array');
+  it('should be created', async () => {
+    expect(service).toBeTruthy();
   });
 });

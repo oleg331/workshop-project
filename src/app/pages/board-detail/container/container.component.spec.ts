@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -14,13 +15,9 @@ describe('ContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ContainerComponent,
-        UsersComponent,
-        ColumnComponent,
-        TaskComponent
-      ],
-      imports: [SharedModule, RouterModule.forRoot([])]
+      declarations: [ContainerComponent],
+      imports: [SharedModule, RouterModule.forRoot([])],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 

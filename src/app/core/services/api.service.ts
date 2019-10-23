@@ -43,7 +43,7 @@ export class ApiService {
     localStorage.removeItem('token');
   }
 
-  postWithoutToken(path: string, body: any): Promise<any> {
+  postWithoutToken(path: string, body: any): Promise<AuthData> {
     return this.http.post(`${APIUrl}/${path}`, body)
       .pipe(map((response: any) => {
         if (response.success && response.data.token) {
