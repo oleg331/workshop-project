@@ -1,0 +1,4 @@
+<mat-form-field class="search">
+  <input #search (input)="changeSearchText(search.value)" value="{{searchText}}" matInput placeholder="Search by board" />
+  <mat-icon *ngIf="search.value.length" (click)="clearText(search)" class="icon-clear" matSuffix>clear</mat-icon>
+</mat-form-field>

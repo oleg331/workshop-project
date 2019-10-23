@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title>{{ board?.title }}</mat-card-title>
+  <mat-card-content fxLayout="column">
+    <mat-chip-list class="users">
+      <h4>Users:</h4>
+      <mat-chip
+        *ngFor="let user of board?.users; trackBy: trackByUserId"
+        mat-raised-button
+        matTooltip="{{ user.email }}"
+        >{{ user.name }}
+      </mat-chip>
+      <mat-chip mat-raised-button *ngIf="users"
+        >The board has no users</mat-chip
+      >
+    </mat-chip-list>
+    <a routerLink="/board/{{ board?._id }}" class="action" mat-raised-button
+      >View board</a
+    >
+    <a class="action" mat-raised-button (click)="deleteBoard($event)"
+      >Delete board</a
+    >
+  </mat-card-content>
+</mat-card>

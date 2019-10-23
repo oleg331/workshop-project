@@ -1,0 +1,71 @@
+<mat-card>
+    <form
+      autocomplete="off"
+      novalidate
+      fxLayout="column wrap"
+      [formGroup]="authForm"
+      (ngSubmit)="checkFormValidation(authForm.value)"
+    >
+      <mat-card-content fxLayout="column">
+        <mat-form-field>
+          <input
+            matInput
+            id="email"
+            name="email"
+            formControlName="email"
+            placeholder="Email"
+            required
+          />
+          <mat-error *ngIf="hasError('email', 'required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">
+            Email is invalid
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            id="name"
+            name="name"
+            formControlName="name"
+            placeholder="Username"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            id="name"
+            name="password"
+            formControlName="password"
+            placeholder="Password"
+            required
+            [type]="isPasswordHidden ? 'password' : 'text'"
+          />
+          <mat-error *ngIf="hasError('password', 'required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="hasError('password', 'minLength')">
+            Password length at least 7 characters
+          </mat-error>
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hidePassword($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="isPasswordHidden"
+          >
+            <mat-icon>
+              {{ isPasswordHidden ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button type="submit" mat-raised-button [disabled]="!authForm.valid" color="primary">
+          Register
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+  

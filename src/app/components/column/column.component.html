@@ -1,0 +1,33 @@
+<mat-card class="column">
+  <mat-card-header class="column-header" fxLayout="column">
+    <mat-card-title>{{ column?.title }}</mat-card-title>
+
+    <mat-chip-list class="column-actions">
+      <mat-chip matTooltip="edit column title">
+        <mat-icon
+          (click)="editColumn()"
+          aria-hidden="false"
+          aria-label="edit column title"
+          >edit</mat-icon
+        >
+      </mat-chip>
+      <mat-chip matTooltip="delete column">
+        <mat-icon
+          (click)="deleteColumn()"
+          aria-hidden="false"
+          aria-label="delete column"
+          >delete</mat-icon
+        >
+      </mat-chip>
+      <mat-chip (click)="addTask()" matTooltip="add new task">
+        <mat-icon aria-hidden="false" aria-label="add new task"
+          >playlist_add</mat-icon
+        >
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card-header>
+
+  <mat-card-content>
+    <ng-content name="tasks"></ng-content>
+  </mat-card-content>
+</mat-card>

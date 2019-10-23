@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { SpinnerService } from './core/services/spinner.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-workshop';
+  spinnerVisible$: Observable<boolean>;
+
+  constructor(
+    spinnerService: SpinnerService
+  ) {
+    this.spinnerVisible$ = spinnerService.visibility;
+  }
 }

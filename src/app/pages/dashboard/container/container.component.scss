@@ -1,0 +1,15 @@
+.boards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 20px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+
+    .search {
+        margin-right: 70px;
+    }
+}

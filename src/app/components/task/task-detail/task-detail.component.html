@@ -1,0 +1,39 @@
+<div class="modal-container">
+  <button (click)="cancel()" mat-button class="icon-close">
+    <mat-icon aria-hidden="false">clear</mat-icon>
+  </button>
+  <h1 mat-dialog-title>{{ title }}</h1>
+  <form
+    autocomplete="off"
+    novalidate
+    fxLayout="column wrap"
+    [formGroup]="taskDetail"
+    (ngSubmit)="checkFormValidation(taskDetail.value.comment)"
+  >
+    <mat-dialog-actions fxLayout="column">
+      <mat-form-field>
+        <textarea #comment formControlName="comment" name="comment" id="comment" matInput placeholder="Press comment message"></textarea>
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-raised-button
+        [disabled]="!taskDetail.valid"
+        color="primary"
+      >
+        Add comment
+      </button>
+    </mat-dialog-actions>
+  </form>
+  <mat-dialog-content>
+    <mat-list class="comments">
+      <mat-list-item *ngFor="let comment of comments | reverse; let i = index; trackBy: trackByCommentId" class="comment">
+        <mat-icon class="icon-delete-comment" (click)="deleteComment(comment._id, i)" aria-hidden="false">clear</mat-icon>
+        <div class="comment-info">
+          <p class="comment-author">{{ comment.name }}</p>
+        </div>
+        <div class="comment-message">{{ comment.comment }}</div>
+      </mat-list-item>
+    </mat-list>
+    <p *ngIf="!comments">This task has no comments</p>
+  </mat-dialog-content>
+</div>
