@@ -11,6 +11,8 @@ import { Modal } from 'src/app/shared/modules/modal/modal.model';
 
 import { User } from 'src/app/core/models';
 
+import { trackById } from 'src/app/core/utils';
+
 @Component({
   selector: 'app-board-add',
   templateUrl: './board-add.component.html',
@@ -23,6 +25,9 @@ export class BoardAddComponent extends Modal implements OnInit {
   type: string;
   title: string;
   usersList: User[];
+
+
+  trackByUserId = trackById;
 
   constructor(
     private boardsService: BoardsService,
@@ -82,10 +87,6 @@ export class BoardAddComponent extends Modal implements OnInit {
 
     this.reloadService.reloadDashboard$.next();
     this.save();
-  }
-
-  trackByUserId(index: string, user: User): string {
-    return user._id;
   }
 
   save(): void {

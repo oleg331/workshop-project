@@ -8,6 +8,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 
 import { BoardEditComponent } from '../components/modals/board-edit/board-edit.component';
 import { TaskDetailComponent } from '../components/task/task-detail/task-detail.component';
+import { BoardAddComponent } from '../components/modals/board-add/board-add.component';
 
 import { ReversePipe } from '../shared/pipes';
 
@@ -17,8 +18,9 @@ import { ReversePipe } from '../shared/pipes';
     PagesComponent,
     BoardEditComponent,
     TaskDetailComponent,
+    BoardAddComponent,
     ReversePipe
   ],
-  entryComponents: [BoardEditComponent, TaskDetailComponent]
+  entryComponents: [BoardEditComponent, TaskDetailComponent, BoardAddComponent]
 })
 export class PagesModule {}

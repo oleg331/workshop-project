@@ -5,8 +5,12 @@ import { BoardAddComponent } from 'src/app/components/modals/board-add/board-add
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { ModalService } from 'src/app/shared/modules/modal/modal.service';
 import { ReloadService } from 'src/app/core/services/reload.service';
+import { ToastrService } from 'ngx-toastr';
 
 import { Board } from 'src/app/core/models';
+import { NotificationService } from 'src/app/core/services/notification.service';
+
+import { trackById } from 'src/app/core/utils';
 
 @Component({
   selector: 'app-container',
@@ -17,13 +21,21 @@ export class ContainerComponent implements OnInit {
   public boardsList: Board[];
   public searchText: string;
 
+  trackByBoardId = trackById;
+
   constructor(
+    private notificationService: NotificationService,
     private boardsService: BoardsService,
     private modalService: ModalService,
-    private reloadService: ReloadService
-  ) { }
+    private reloadService: ReloadService,
+    private toastr: ToastrService
+  ) {}
 
-  async ngOnInit(): Promise<any> {
+  ngOnInit() {
+    this.init();
+  }
+
+  async init(): Promise<void> {
     this.reloadService.reloadDashboard$.asObservable().subscribe(async () => {
       this.boardsList = await this.getBoards();
     });
@@ -54,14 +66,12 @@ export class ContainerComponent implements OnInit {
   createAddBoardModal(modalOptions: any): void {
     const modalRef = this.modalService.open(BoardAddComponent, modalOptions);
 
-    modalRef.onResult().subscribe(
-      closed => console.log('closed', closed),
-      dismissed => console.log('dismissed', dismissed),
-      () => console.log('completed')
-    );
-  }
-
-  trackByBoardId(index: string, board: Board): string {
-    return board._id;
+    modalRef
+      .onResult()
+      .subscribe(
+        closed => console.log('closed', closed),
+        dismissed => console.log('dismissed', dismissed),
+        () => console.log('completed')
+      );
   }
 }

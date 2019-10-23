@@ -1,12 +1,34 @@
-import { TestBed } from '@angular/core/testing';
-
 import { AuthGuardService } from './auth-guard.service';
 
-describe('AuthGuardService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+class MockRouter {
+  navigate(path: string) {}
+}
 
-  it('should be created', () => {
-    const service: AuthGuardService = TestBed.get(AuthGuardService);
-    expect(service).toBeTruthy();
+describe('AuthGuardService', () => {
+
+  beforeEach(() => {
+    describe('canActivate', () => {
+      let authGuardService: AuthGuardService;
+      let authService;
+      let router;
+
+      it('should return true for a logged in user', () => {
+        authService = { isAuthenticated: () => true };
+        router = new MockRouter();
+        authGuardService = new AuthGuardService(authService, router);
+
+        expect(authGuardService.canActivate()).toEqual(true);
+      });
+
+      it('should navigate to home for a logged out user', () => {
+        authService = { isAuthenticated: () => false };
+        router = new MockRouter();
+        authGuardService = new AuthGuardService(authService, router);
+        spyOn(router, 'navigate');
+
+        expect(authGuardService.canActivate()).toEqual(false);
+        expect(router.navigate).toHaveBeenCalledWith(['auth']);
+      });
+    });
   });
 });

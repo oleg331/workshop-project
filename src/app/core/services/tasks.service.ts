@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { ApiService } from './api.service';
 
-import { User } from '../models';
+import { User, Task, Comment } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,23 +18,23 @@ export class TasksService extends ApiService {
     return this.getUserInfo();
   }
 
-  addTask(id: string, body: any): Promise<any> {
+  addTask(id: string, body: any): Promise<Task> {
     return this.post(`tasks/${id}`, body);
   }
 
-  deleteTask(id: string): Promise<any> {
+  deleteTask(id: string): Promise<Task> {
     return this.delete(`tasks/${id}`);
   }
 
-  updateTask(id: string, body: any): Promise<any> {
+  updateTask(id: string, body: any): Promise<Task> {
     return this.put(`tasks/${id}`, body);
   }
 
-  addComment(id: string, body: any): Promise<any> {
+  addComment(id: string, body: any): Promise<Comment> {
     return this.post(`comments/${id}`, body);
   }
 
-  deleteComment(commentId: string, taskId: string): Promise<any> {
+  deleteComment(commentId: string, taskId: string): Promise<Comment> {
     return this.delete(`comments/${commentId}`, { taskId });
   }
 }

@@ -1,12 +1,27 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, tick, fakeAsync } from '@angular/core/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from '@angular/common/http/testing';
 
 import { ColumnsService } from './columns.service';
 
-describe('ColumnsService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+describe('ColumnsService', async () => {
+  let service: ColumnsService;
+  let httpMock: HttpTestingController;
 
-  it('should be created', () => {
-    const service: ColumnsService = TestBed.get(ColumnsService);
-    expect(service).toBeTruthy();
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [ColumnsService]
+    })
+  );
+
+  service = TestBed.get(ColumnsService);
+  httpMock = TestBed.get(HttpTestingController);
+
+  it('should be created a column', async () => {
+    const result = await service.addColumn(':id', 'title');
+    expect(result.title).toBe('Column title');
   });
 });

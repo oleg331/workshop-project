@@ -1,35 +1,54 @@
-import { TestBed, async } from '@angular/core/testing';
+import {
+  TestBed,
+  async,
+  inject,
+  ComponentFixture
+} from '@angular/core/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import { AppComponent } from './app.component';
+import { MaterialModule } from './shared/material.module';
+
+import { SpinnerService } from './core/services/spinner.service';
+import { MockSpinnerService } from './core/services/mock';
+import { Observable, of } from 'rxjs';
 
 describe('AppComponent', () => {
+  let mockSpinnerService;
+  let fixture;
+  let component;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [RouterTestingModule, HttpClientTestingModule, MaterialModule],
+      declarations: [AppComponent],
+      providers: [
+        {
+          provide: SpinnerService,
+          useClass: MockSpinnerService
+        }
+      ]
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
 
-  it(`should have as title 'angular-workshop'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angular-workshop');
-  });
+    mockSpinnerService = fixture.debugElement.injector.get(SpinnerService);
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angular-workshop app is running!');
+  });
+
+  it('should be created', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should initialize spinner', () => {
+    expect(component.spinnerVisible$).toEqual(jasmine.any(Observable));
   });
 });

@@ -4,6 +4,8 @@ import { UserService } from 'src/app/core/services';
 
 import { User } from 'src/app/core/models';
 
+import { trackById } from 'src/app/core/utils';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -16,6 +18,8 @@ export class UsersComponent implements OnInit {
   @Output() userDeleted = new EventEmitter<boolean>();
 
   usersList: User[];
+
+  trackByUserId = trackById;
 
   constructor(private userService: UserService) {}
 
@@ -40,10 +44,6 @@ export class UsersComponent implements OnInit {
   async deleteUser(userId: string): Promise<void> {
     await this.userService.toggleUserOnBoard(this.boardId, userId);
     this.userDeleted.emit(true);
-  }
-
-  trackByUserId(index: string, user: User): string {
-    return user._id;
   }
 
 }

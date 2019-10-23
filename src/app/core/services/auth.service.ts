@@ -38,7 +38,7 @@ export class AuthService extends ApiService {
     }
 
     async auth(path: string, userInfo: UserInfo): Promise<AuthData> {
-        const user = await this.postWithoutToken(`auth/${path}`, userInfo);
+        const user = await this.postWithoutToken({ path: `auth/${path}`, body: userInfo });
         this.currentUserSubject.next(user);
         this.currentUser = user;
         this.token = user.token;
@@ -48,7 +48,7 @@ export class AuthService extends ApiService {
         return user;
     }
 
-    logout() {
+    logout(): void {
         localStorage.removeItem('token');
         this.router.navigate(['auth']);
         this.currentUserSubject.next(null);

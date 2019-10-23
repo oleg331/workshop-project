@@ -1,20 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditTaskComponent } from './board-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
-describe('EditTaskComponent', () => {
-  let component: EditTaskComponent;
-  let fixture: ComponentFixture<EditTaskComponent>;
+import { SharedModule } from 'src/app/shared/shared.module';
+
+import { BoardEditComponent } from './board-edit.component';
+
+describe('BoardEditComponent', () => {
+  let component: BoardEditComponent;
+  let fixture: ComponentFixture<BoardEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditTaskComponent ]
-    })
-    .compileComponents();
+      declarations: [BoardEditComponent],
+      imports: [SharedModule, BrowserAnimationsModule, ReactiveFormsModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditTaskComponent);
+    fixture = TestBed.createComponent(BoardEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

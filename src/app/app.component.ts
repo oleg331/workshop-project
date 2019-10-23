@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { SpinnerService } from './core/services/spinner.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,11 @@ import { SpinnerService } from './core/services/spinner.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  showSpinner: boolean;
+  spinnerVisible$: Observable<boolean>;
 
   constructor(
-    private spinnerService: SpinnerService,
-    private httpClient: HttpClient
-  ) { }
+    spinnerService: SpinnerService
+  ) {
+    this.spinnerVisible$ = spinnerService.visibility;
+  }
 }

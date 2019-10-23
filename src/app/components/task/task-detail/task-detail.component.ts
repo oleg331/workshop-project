@@ -9,12 +9,21 @@ import { Modal } from 'src/app/shared/modules/modal/modal.model';
 import { Task, Comment, Column, Board } from 'src/app/core/models';
 import { takeUntil } from 'rxjs/operators';
 
+import { trackById } from 'src/app/core/utils';
+
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.scss']
 })
 export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
+
+  constructor(
+    private tasksService: TasksService,
+    private reloadService: ReloadService
+  ) {
+    super();
+  }
   public taskDetail: FormGroup;
   destroy$: Subject<void> = new Subject<void>();
 
@@ -24,12 +33,7 @@ export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
   task: Task;
   comments: Comment[];
 
-  constructor(
-    private tasksService: TasksService,
-    private reloadService: ReloadService
-  ) {
-    super();
-  }
+  trackByCommentId = trackById;
 
   ngOnInit() {
     this.taskDetail = new FormGroup({
@@ -37,7 +41,8 @@ export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
     });
 
     this.reloadService.reloadTaskDetail$.asObservable()
-      .pipe(takeUntil(this.destroy$)).subscribe((board: Board) => {
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((board: Board) => {
         const taskUpdated = this.filterBoardByTask(board.columns);
         this.updateTask(taskUpdated);
       });
@@ -67,7 +72,7 @@ export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
     this.comments = task.comments;
   }
 
-  public hasError = (controlName: string, errorName: string) => {
+  public hasError = (controlName: string, errorName: string): boolean => {
     return this.taskDetail.controls[controlName].hasError(errorName);
   }
 
@@ -79,7 +84,7 @@ export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
     this.taskDetail.reset();
   }
 
-  async addComment(comment: string): Promise<any> {
+  async addComment(comment: string): Promise<void> {
 
     const userInfo = this.tasksService.getUserInfo();
 
@@ -103,10 +108,6 @@ export class TaskDetailComponent extends Modal implements OnInit, OnDestroy {
 
   cancel(): void {
     this.dismiss('cancelling');
-  }
-
-  trackByCommentId(index: string, comment: Comment): string {
-    return comment._id;
   }
 
   ngOnDestroy() {

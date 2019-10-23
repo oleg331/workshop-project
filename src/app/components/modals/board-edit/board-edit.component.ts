@@ -32,7 +32,7 @@ export class BoardEditComponent extends Modal implements OnInit {
 
   ngOnInit(): void {
     this.authForm = new FormGroup({
-      title: new FormControl(this.oldTitle, Validators.required),
+      title: new FormControl(this.oldTitle, Validators.required)
     });
   }
 
@@ -45,13 +45,13 @@ export class BoardEditComponent extends Modal implements OnInit {
 
   public hasError = (controlName: string, errorName: string) => {
     return this.authForm.controls[controlName].hasError(errorName);
-  }
+  };
 
   public checkFormValidation = (title: string) => {
     if (this.authForm.valid) {
       this.edit(title);
     }
-  }
+  };
 
   async edit(title: string): Promise<any> {
     switch (this.type) {
@@ -80,5 +80,4 @@ export class BoardEditComponent extends Modal implements OnInit {
   cancel(): void {
     this.dismiss('cancelling');
   }
-
 }
