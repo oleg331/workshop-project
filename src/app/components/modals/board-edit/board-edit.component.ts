@@ -69,7 +69,7 @@ export class BoardEditComponent extends Modal implements OnInit {
       }
     }
 
-    this.reloadService.reloadBoard$.next();
+    this.reloadService.reloadDashboard$.next();
     this.save();
   }
 

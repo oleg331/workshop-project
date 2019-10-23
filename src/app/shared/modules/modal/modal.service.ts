@@ -5,6 +5,7 @@ import {
   ApplicationRef,
   Type
 } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { ModalComponent } from './modal.component';
 

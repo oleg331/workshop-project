@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { BoardsService } from 'src/app/core/services/boards.service';
 import { UserService } from 'src/app/core/services';
 import { TasksService } from 'src/app/core/services/tasks.service';
 import { ColumnsService } from 'src/app/core/services/columns.service';
@@ -24,9 +25,10 @@ export class BoardAddComponent extends Modal implements OnInit {
   usersList: User[];
 
   constructor(
+    private boardsService: BoardsService,
     private userService: UserService,
-    private tasksService: TasksService,
     private columnsService: ColumnsService,
+    private tasksService: TasksService,
     private reloadService: ReloadService
   ) {
     super();
@@ -55,8 +57,12 @@ export class BoardAddComponent extends Modal implements OnInit {
     }
   }
 
-  async add(value: any): Promise<any> {
+  async add(value: string): Promise<any> {
     switch (this.type) {
+      case 'board': {
+        await this.boardsService.createBoard(value);
+        break;
+      }
       case 'user': {
         await this.userService.toggleUserOnBoard(this.id, value);
         break;
@@ -74,8 +80,12 @@ export class BoardAddComponent extends Modal implements OnInit {
       }
     }
 
-    this.reloadService.reloadBoard$.next();
+    this.reloadService.reloadDashboard$.next();
     this.save();
+  }
+
+  trackByUserId(index: string, user: User): string {
+    return user._id;
   }
 
   save(): void {

@@ -7,17 +7,18 @@ import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 
 import { BoardEditComponent } from '../components/modals/board-edit/board-edit.component';
-import { AddBoardComponent } from '../components/modals/add-board/add-board.component';
-import { BoardAddComponent } from '../components/modals/board-add/board-add.component';
+import { TaskDetailComponent } from '../components/task/task-detail/task-detail.component';
+
+import { ReversePipe } from '../shared/pipes';
 
 @NgModule({
   imports: [SharedModule, PagesRoutingModule, FormsModule, ReactiveFormsModule],
   declarations: [
     PagesComponent,
     BoardEditComponent,
-    AddBoardComponent,
-    BoardAddComponent
+    TaskDetailComponent,
+    ReversePipe
   ],
-  entryComponents: [BoardEditComponent, AddBoardComponent, BoardAddComponent]
+  entryComponents: [BoardEditComponent, TaskDetailComponent]
 })
 export class PagesModule {}

@@ -7,7 +7,7 @@
       [searchText]="searchText"
     ></app-search>
     <a 
-      (click)="createAddBoardModal()" 
+      (click)="addBoard()" 
       mat-raised-button 
       color="primary">
       Add board
@@ -15,7 +15,7 @@
   </header>
   <div class="boards">
     <app-board
-      *ngFor="let board of boardsList?.boards | filterByBoard: searchText"
+      *ngFor="let board of boardsList?.boards | filterByBoard: searchText; trackBy: trackByBoardId"
       (boardDeleted)="handleBoardDeleted()"
       [board]="board"
     ></app-board>

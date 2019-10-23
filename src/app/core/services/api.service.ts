@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { APIUrl } from '../contants';
 
-import { Response, AuthData } from '../models';
+import { AuthData, User } from '../models';
 import { pipe } from 'rxjs';
 
 @Injectable({
@@ -29,6 +29,15 @@ export class ApiService {
     localStorage.setItem('token', token);
   }
 
+  setUser(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getUserInfo() {
+    const user = localStorage.getItem('user');
+    return JSON.parse(user) as User;
+  }
+
   resetToken(): void {
     this.options.headers.delete('authorization');
     localStorage.removeItem('token');
@@ -39,6 +48,7 @@ export class ApiService {
       .pipe(map((response: any) => {
         if (response.success && response.data.token) {
           this.setToken(response.data.token);
+          this.setUser(response.data.user);
         }
         return response.data as AuthData;
       }))
@@ -57,8 +67,12 @@ export class ApiService {
       .toPromise();
   }
 
-  delete<T>(path: string): Promise<T> {
-    return this.http.delete(`${APIUrl}/${path}`, this.options)
+  delete<T>(path: string, body?: any): Promise<T> {
+    const options = {
+      ...this.options,
+      body
+    };
+    return this.http.delete(`${APIUrl}/${path}`, options)
       .pipe(map((response: any) => response.data as T))
       .toPromise();
   }
